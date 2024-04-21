@@ -24,6 +24,7 @@ new #[Layout('layouts.guest')] class extends Component
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
+            'role' => ['required'],
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
@@ -47,7 +48,7 @@ new #[Layout('layouts.guest')] class extends Component
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+        </div>       
 
         <!-- Password -->
         <div class="mt-4">
@@ -70,6 +71,16 @@ new #[Layout('layouts.guest')] class extends Component
                             name="password_confirmation" required autocomplete="new-password" />
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+        </div>
+
+         <!-- Role Address -->
+         <div class="mt-4">
+            <x-input-label for="role" :value="__('Register As')" />
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-gray-200 p-4"><input type="radio" name="role"> &nbsp;Lawyer</div>
+                <div class="bg-gray-200 p-4"><input type="radio" name="role" checked="checked"> &nbsp;Client</div>
+            </div>
+            <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
         <div class="flex items-center justify-end mt-4">
