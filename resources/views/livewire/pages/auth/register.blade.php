@@ -27,25 +27,9 @@ new #[Layout('layouts.guest')] class extends Component
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
-
         event(new Registered($user = User::create($validated)));
-
         Auth::login($user);
-        $role=Auth::user()->role;
-        switch($role){
-            case "admin":
-                $this->redirectIntended(default: route('admin', absolute: false), navigate: true);
-                break;
-            case "lawyer":
-                $this->redirectIntended(default: route('lawyer', absolute: false), navigate: true);
-                break;
-            case "client":
-                $this->redirectIntended(default: route('client', absolute: false), navigate: true);
-                break;  
-            default:
-                redirect('/');
-        }
-        //$this->redirect(route('dashboard', absolute: false), navigate: true);
+        $this->redirect(route('dashboard', absolute: false), navigate: true);
     }
 }; ?>
 
