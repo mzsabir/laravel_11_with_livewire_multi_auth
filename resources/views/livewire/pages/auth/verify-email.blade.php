@@ -14,13 +14,12 @@ new #[Layout('layouts.guest')] class extends Component
     public function sendVerification(): void
     {
         if (Auth::user()->hasVerifiedEmail()) {
-            $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
+            $this->redirectIntended(default: route('dashboard', absolute: false), navigate: false);
 
             return;
         }
 
         Auth::user()->sendEmailVerificationNotification();
-
         Session::flash('status', 'verification-link-sent');
     }
 
@@ -30,8 +29,7 @@ new #[Layout('layouts.guest')] class extends Component
     public function logout(Logout $logout): void
     {
         $logout();
-
-        $this->redirect('/', navigate: true);
+        $this->redirect('/');
     }
 }; ?>
 

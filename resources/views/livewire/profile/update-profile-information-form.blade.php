@@ -5,11 +5,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
 use Livewire\Volt\Component;
+use Livewire\WithFileUploads;
 
 new class extends Component
 {
+    use WithFileUploads; 
     public string $name = '';
     public string $email = '';
+    public $oldImage;
+    public $picture="profile-img.jpg";
 
     /**
      * Mount the component.
@@ -18,6 +22,7 @@ new class extends Component
     {
         $this->name = Auth::user()->name;
         $this->email = Auth::user()->email;
+        $this->picture = Auth::user()->picture;
     }
 
     /**
@@ -33,6 +38,13 @@ new class extends Component
         ]);
 
         $user->fill($validated);
+        //dd($this->picture);
+        $this->slug=strtolower(str_replace(" ","-",$this->name));
+        $image_name=$this->slug.".".$this->picture->extension();
+        $this->picture->storeAs('users', $image_name);
+
+        $user->picture=$image_name;
+        $user->picture=$image_name;
 
         if ($user->isDirty('email')) {
             $user->email_verified_at = null;
@@ -73,7 +85,7 @@ new class extends Component
         </p>
     </header>
 
-    <form wire:submit="updateProfileInformation" class="mt-6 space-y-6">
+    <form wire:submit="updateProfileInformation" class="mt-6 space-y-6" enctype="multipart/form-data">
         <div>
             <x-input-label for="name" :value="__('Name')" />
             <x-text-input wire:model="name" id="name" name="name" type="text" class="mt-1 block w-full" required autofocus autocomplete="name" />
@@ -102,6 +114,15 @@ new class extends Component
                     @endif
                 </div>
             @endif
+        </div>
+
+        <div class="row">
+            <img src="{{url('images/users/'.$this->picture)}}" width="150" height="150" style="width:150px; margin:10px 10px 10px 60px; padding:10px; border:1px solid black">
+        </div>
+        <div>
+            <x-input-label for="picture" :value="__('Picture')" />
+            <x-text-input wire:model="picture" id="picture" name="picture" type="file" class="mt-1 block w-full"/>
+            <x-input-error class="mt-2" :messages="$errors->get('picture')" />
         </div>
 
         <div class="flex items-center gap-4">

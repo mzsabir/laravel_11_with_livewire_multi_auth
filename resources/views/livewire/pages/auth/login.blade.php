@@ -19,15 +19,24 @@ new #[Layout('layouts.guest')] class extends Component
         $this->form->authenticate();
         Session::regenerate();
         $role=Auth::user()->role;
+        /*session([
+            'user_id' => Auth::user()->id,
+            'role' => $role, 
+            'name'=>Auth::user()->name,
+            'picture'=>Auth::user()->picture
+        ]);*/
+
+        Session::put('user_id', Auth::user()->id);
+        //dd(Session::put('user_id'));
         switch($role){
             case "admin":
-                $this->redirectIntended(default: route('admin', absolute: false), navigate: true);
+                $this->redirectIntended(default: route('admin', absolute: false), navigate: false);
                 break;
             case "lawyer":
-                $this->redirectIntended(default: route('lawyer', absolute: false), navigate: true);
+                $this->redirectIntended(default: route('lawyer', absolute: false), navigate: false);
                 break;
             case "client":
-                $this->redirectIntended(default: route('client', absolute: false), navigate: true);
+                $this->redirectIntended(default: route('client', absolute: false), navigate: false);
                 break;  
             default:
                 redirect('/');
