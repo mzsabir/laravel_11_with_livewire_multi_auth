@@ -17,17 +17,7 @@ class HomeController extends Controller
         $categories=['Criminal Lawyer','Cooperate Lawyer'];
         return view('welcome',compact('categories'));
    }  
-   public function appointment($id=0)
-   {
-      $uid = Auth::id();
-      //dd($id);
-      if($id==0)
-         $lawyer="";
-      else
-         $lawyer=User::where('id',$id)->get()->first();
-      //dd($lawyer);
-      return view('appointment',compact('lawyer','uid'),);
-   }
+  
 
    public function book_appointment(Request $request)
    {
@@ -50,7 +40,7 @@ class HomeController extends Controller
 
      // Additional logic or redirection after successful data storage
 
-     return redirect()->back()->with('success', 'Case has been accepted by Lawyer successfully!');
+     return redirect()->back()->with('success', 'Appointment Request has been sent to Lawyer successfully!');
    }
    public function close_case($id)
    {
@@ -125,13 +115,17 @@ class HomeController extends Controller
    public function admin_dashboard()
    {      
       $cases=Policecase::all();
+      return "Admin";
+      lotout();
+      dd($cases);
       $cases_progress=Policecase::where('status','in progress')->get();
       $count=[
          'messages_total'=>Message::all()->count(),
          'messages_pending'=>Message::where('time',NULL)->count(),
          'cases_in_progress'=>Policecase::where('status','completed')->count(),
       ];
-      return view('client',compact('cases','cases_progress','count'));
+      
+      //return view('admin',compact('cases','cases_progress','count'));
    }
 
    public function app($id)

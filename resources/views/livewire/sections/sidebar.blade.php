@@ -69,11 +69,14 @@
         </a>
       </li><!-- End Hearing Nav -->
 
-     
-    
-
-    
-
+      <li class="nav-item">
+        <a class="nav-link " href="/myappointments">
+          <i class="bi bi-grid"></i>
+          <span>Appointments</span>
+        </a>
+      </li><!-- End Appointment Nav -->
     </ul>
+
+
 
   </aside><!-- End Sidebar-->

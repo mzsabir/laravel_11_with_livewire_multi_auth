@@ -70,7 +70,7 @@
         	<div class="col-lg-3 col-sm-6">
         		<div class="block-2 ftco-animate fadeInUp ftco-animated">
 	            <div class="flipper">
-	              <div class="front" style="background-image: url(/images/person_1.jpg);">
+	              <div class="front" style="background-image: url('{{url('images/users/'.$lawyer->picture)}}')">
 	                <div class="box">
 	                  <h2>{{$lawyer->name}}</h2>
 	                  <p>{{$lawyer->area}}</p>
@@ -83,7 +83,7 @@
 	                </blockquote>
 	                <div class="author d-flex">
 	                  <div class="image align-self-center">
-	                    <img src="images/person_1.jpg" alt="">
+	                    <img src="{{url('images/users/'.$lawyer->picture)}}" alt="{{$lawyer->name}}">
 	                  </div>
 	                  <div class="name align-self-center ml-3">Ryan Anderson <span class="position">Civil Lawyer</span></div>
 	                </div>
@@ -92,7 +92,12 @@
 	          </div>
         	</div>
         	<div class="col-lg-6 col-sm-6">
-        		<h2>{{$lawyer->name}}</h2>
+        		<h2 style="font-size: 30px;">{{$lawyer->name}}</h2>
+            <h2 style="font-size: 24px;">8 Year of Experence as {{$lawyer->area}}</h2>   
+            <h2 style="font-size: 30px;">{{$lawyer->name}}</h2> 
+            <br><br>        
+            <h2>Use the form below to contact for inital appoitment</h2>
+
         	</div>
         	
         
