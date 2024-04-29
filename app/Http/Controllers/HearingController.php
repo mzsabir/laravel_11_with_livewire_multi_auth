@@ -63,7 +63,7 @@ class HearingController extends Controller
 	
         //Policecase::create($req->all()); 
         
-        //dd($req->input("lawyer_id"));
+        //dd($req->input("comment"));
   	    $hearing =new Hearing(); 
         $hearing ->case_id=$req->input("case_id");
         $hearing ->court=$req->input("court");

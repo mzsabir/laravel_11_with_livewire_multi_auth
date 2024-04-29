@@ -15,6 +15,7 @@ class Policecase extends Model
         'title',
         'act',
         'slug',
+        'detail',
         'client_id',
         'lawyer_id',
         'status',

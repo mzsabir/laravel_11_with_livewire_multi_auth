@@ -18,8 +18,8 @@ class Client
         if(!Auth::check()){
             return redirect()->route('login');           
         }
-        $role=Auth::user()->role;
 
+        $role=Auth::user()->role;
         if($role=="client"){
             return $next($request);
         }

@@ -42,7 +42,7 @@
                     </div>
                     <div class="ps-3">
                       <h6>{{$cases->count()}}</h6>
-                      <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+                      <span class="text-success pt-1 fw-bold">{{$count['cases_in_progress']}}</span> <span class="text-muted small pt-2 ps-1">In progress</span>
 
                     </div>
                   </div>
@@ -63,9 +63,8 @@
                       <i class="bi bi-currency-dollar"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>{{$pending}}</h6>
-                      <span class="text-success pill pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
-
+                      <h6>{{$count['messages_total']}}</h6>
+                      <span class="text-success pill pt-1 fw-bold">{{$count['messages_total']-$count['messages_pending']}}</span> <span class="text-muted small pt-2 ps-1">Approved</span>
                     </div>
                   </div>
                 </div>
@@ -223,58 +222,17 @@
               <h5 class="card-title">Upcoming Hearings <span></span></h5>
 
               <div class="activity">
-
+                @foreach($new as $n)
                 <div class="activity-item d-flex">
-                  <div class="activite-label">05 May</div>
+                  <div class="activite-label">{{date("d M", strtotime($n->next_date))}}</div>
                   <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
-                  <div class="activity-content">
-                    
-                    ISL High Court<br>
-                    <a href="#" class="fw-bold text-dark">Murder Case</a><br>
-                    <u>Client:</u> Katiwar Khan
+                  <div class="activity-content">                    
+                    {{$n->court}}<br>
+                    <a href="#" class="fw-bold text-dark">{{$n->judge}}</a><br>
+                    <u>Case:</u> {{$n->case->act}}
                   </div>
                 </div><!-- End activity item-->
-
-                <div class="activity-item d-flex">
-                  <div class="activite-label">56 min</div>
-                  <i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
-                  <div class="activity-content">
-                    Voluptatem blanditiis blanditiis eveniet
-                  </div>
-                </div><!-- End activity item-->
-
-                <div class="activity-item d-flex">
-                  <div class="activite-label">2 hrs</div>
-                  <i class='bi bi-circle-fill activity-badge text-primary align-self-start'></i>
-                  <div class="activity-content">
-                    Voluptates corrupti molestias voluptatem
-                  </div>
-                </div><!-- End activity item-->
-
-                <div class="activity-item d-flex">
-                  <div class="activite-label">1 day</div>
-                  <i class='bi bi-circle-fill activity-badge text-info align-self-start'></i>
-                  <div class="activity-content">
-                    Tempore autem saepe <a href="#" class="fw-bold text-dark">occaecati voluptatem</a> tempore
-                  </div>
-                </div><!-- End activity item-->
-
-                <div class="activity-item d-flex">
-                  <div class="activite-label">2 days</div>
-                  <i class='bi bi-circle-fill activity-badge text-warning align-self-start'></i>
-                  <div class="activity-content">
-                    Est sit eum reiciendis exercitationem
-                  </div>
-                </div><!-- End activity item-->
-
-                <div class="activity-item d-flex">
-                  <div class="activite-label">4 weeks</div>
-                  <i class='bi bi-circle-fill activity-badge text-muted align-self-start'></i>
-                  <div class="activity-content">
-                    Dicta dolorem harum nulla eius. Ut quidem quidem sit quas
-                  </div>
-                </div><!-- End activity item-->
-
+                @endforeach               
               </div>
 
             </div>

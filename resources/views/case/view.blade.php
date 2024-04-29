@@ -73,15 +73,20 @@
                                 <div class="col-md-3">{{$case->act}}</div>
                             </div>
                             <div class="row">
-                                <div class="col-md-3">Lawer Name: </div>
+                                <div class="col-md-3">Case Status: </div>
+                                <div class="col-md-3">{{$case->status}}</div>
+                                
+                            </div> 
+                            <h5 class="card-title">Lawyer Information: </a></h5>
+                            <div class="row">
+                            <div class="col-md-3">Lawer Name: </div>
                                 <div class="col-md-3">{{$lawyer->name}}</div>
+                               
                                 <div class="col-md-3">Area of Specilization: </div>
                                 <div class="col-md-3">{{$lawyer->area}}</div>
                             </div> 
-                            <h5 class="card-title">Case Information: </a></h5>
-
                             <h5 class="card-title">Hearing History</a></h5>
-                            @if($case->status!=="completed")
+                            @if($case->status=="in progress")
                                 <div class="float-start" style="margin:7px 5px 0 0"><a href="/hearing/create" class="btn btn-primary orange" style="font-size: 14px;"> Create New Hearing </a></div>
                             @endif
                                 <table class="table table-borderless datatable" id="table">
@@ -109,12 +114,13 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                                @if(Auth()->user()->role!=="client")
+                                @if(Auth()->user()->role!="client")
                                     @if($case->status=="pending")
-                                    <a href="/approve/{{$case->id}}" class="btn btn-success">Approve this Case</a>
-                                    <a href="/reject/{{$case->id}}" class="btn btn-danger">Reject this Case</a>
+                                    
+                                    <a href="/accept/{{$case->id}}" class="btn btn-success">Approve this Case</a>
+                                    <a href="/deny/{{$case->id}}" class="btn btn-danger">Reject this Case</a>
                                     @endif
-                                    @if($case->status!=="completed")
+                                    @if($case->status=="in progress")
                                     <a href="/close/{{$case->id}}" class="btn btn-success">Complete this Case</a>
                                     @endif
                                 @endif

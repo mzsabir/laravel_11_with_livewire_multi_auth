@@ -26,7 +26,7 @@ new #[Layout('layouts.guest')] class extends Component
             'picture'=>Auth::user()->picture
         ]);*/
 
-        Session::put('user_id', Auth::user()->id);
+        //Session::put('user_id', Auth::user()->id);
         //dd(Session::put('user_id'));
         switch($role){
             case "admin":

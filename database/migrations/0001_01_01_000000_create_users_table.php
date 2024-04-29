@@ -35,7 +35,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('act');           
             $table->string('slug');
-            $table->string('detail');
+            $table->string('detail',100)->default('Explain your case');
             $table->string('client_id');
             $table->string('lawyer_id')->default(0);
             $table->string('status')->default("pending");
@@ -93,6 +93,8 @@ return new class extends Migration
             $table->string('message');
             $table->integer('client_id');
             $table->integer('lawyer_id');
+            $table->string('status')->nullable()->default('pending');
+            $table->string('detail')->nullable()->default('');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
         });   
